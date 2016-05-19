@@ -10,6 +10,7 @@ Para isso aprenderemos como buscar os registros do nosso banco.
 
 
 ### Listar Pokemons com a altura  MENOR QUE 0.5 (Passo 1)
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {height: {$lt: 0.5}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -28,9 +29,11 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "attack": 55,
   "height": 0.4
 }
+```
 
 
 ### Listar Pokemons com a altura MAIOR OU IGUAL QUE 0.5 (Passo 2)
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {height: {$gte: 0.5}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -94,9 +97,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "attack": 48,
   "height": 0.5
 }
-
+```
 
 ### Listar Pokemons com a altura MENOR OU IGUAL QUE 0.5 E do tipo grama (Passo 3)
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {$and: [{height: {$lte: 0.5}}, {type:'grama'}]}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -107,9 +111,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "attack": 49,
   "height": 0.4
 }
-
+```
 
 ### Listar Pokemons com o name 'Pikachu' OU com attack MENOR OU IGUAL QUE 0.5 (Passo 4)
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {$or: [{name: 'Pikachu'}, {attack: {$lte: 0.5}}]}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -120,9 +125,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "attack": 55,
   "height": 0.4
 }
-
+```
 
 ### Listar Pokemons com o attack MAIOR OU IGUAL QUE 48 E com height MENOR OU IGUAL 0.5
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {$and: [{attack: {$gte: 48}}, {height: {$lte: 0.5}}]}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -149,3 +155,4 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "attack": 49,
   "height": 0.4
 }
+```

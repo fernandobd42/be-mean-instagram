@@ -40,7 +40,8 @@ Se der tempo mostrar como buscar em objetos embedados.
 
 ## Exercício
 
-1. **Adicionar** 2 ataques ao mesmo tempo para os seguintes pokemons: Pikachu, Squirtle, Bulbassauro e Charmander.
+### 1. **Adicionar** 2 ataques ao mesmo tempo para os seguintes pokemons: Pikachu, Squirtle, Bulbassauro e Charmander.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {name: /pikachu/i}
 fernando(mongod-3.2.6) be-mean-pokemons> var mod = {$pushAll: {moves: ['Trovão neles', 'Raio verde']}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.update(query, mod)
@@ -77,9 +78,10 @@ WriteResult({
   "nUpserted": 0,
   "nModified": 1
 })
+```
 
-
-2. **Adicionar** 1 movimento em todos os pokemons: `desvio`.
+### 2. **Adicionar** 1 movimento em todos os pokemons: `desvio`.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {}
 fernando(mongod-3.2.6) be-mean-pokemons> var mod = {$push: {moves: 'desvio'}}
 fernando(mongod-3.2.6) be-mean-pokemons> var options = {multi: true}
@@ -90,9 +92,10 @@ WriteResult({
   "nUpserted": 0,
   "nModified": 12
 })
+```
 
-
-3. **Adicionar** o pokemon `AindaNaoExisteMon` caso ele não exista com todos os dados com o valor `null` e a descrição: "Sem maiores informações".
+### 3. **Adicionar** o pokemon `AindaNaoExisteMon` caso ele não exista com todos os dados com o valor `null` e a descrição: "Sem maiores informações".
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {name: /AindaNaoExisteMon/i}
 fernando(mongod-3.2.6) be-mean-pokemons> var mod = {$setOnInsert: {name: 'AindaNaoExisteMon', type: null, attack: null, defense: null, height: null, description: 'Sem maiores informações'}}
 fernando(mongod-3.2.6) be-mean-pokemons> var options = {upsert: true}
@@ -104,9 +107,10 @@ WriteResult({
   "nModified": 0,
   "_id": ObjectId("572e780de2d38a15d1fdf9b6")
 })
+```
 
-
-4. Pesquisar todos o pokemons que possuam o ataque `investida` e mais um que você adicionou, escolha seu pokemon favorito.
+### 4. Pesquisar todos o pokemons que possuam o ataque `investida` e mais um que você adicionou, escolha seu pokemon favorito.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {moves: {$in: [/investida/i, /fire wave/i]}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -277,9 +281,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   ]
 }
 Fetched 12 record(s) in 8ms
+```
 
-
-5. Pesquisar **todos** os pokemons que possuam os ataques que você adicionou, escolha seu pokemon favorito.
+### 5. Pesquisar **todos** os pokemons que possuam os ataques que você adicionou, escolha seu pokemon favorito.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {moves: {$all: [/investida/i, /fire wave/i]}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -299,9 +304,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   ]
 }
 Fetched 1 record(s) in 3ms
+```
 
-
-6. Pesquisar **todos** os pokemons que não são do tipo `elétrico`.
+### 6. Pesquisar **todos** os pokemons que não são do tipo `elétrico`.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {type: {$not: /elétrico/i}}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -481,9 +487,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "description": "Sem maiores informações"
 }
 Fetched 13 record(s) in 10ms
+```
 
-
-7. Pesquisar **todos** os pokemons que tenham o ataque `investida` **E** tenham a attack **não menor ou igual** a 49.
+### 7. Pesquisar **todos** os pokemons que tenham o ataque `investida` **E** tenham a attack **não menor ou igual** a 49.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {$and:[ {moves: {$in: [/investida/i]}}, {attack: {$not: {$lte: 49}}}]}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -609,9 +616,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   "active": false
 }
 Fetched 9 record(s) in 8ms
+```
 
-
-8. Remova **todos** os pokemons do tipo água e com attack menor que 50.
+### 8. Remova **todos** os pokemons do tipo água e com attack menor que 50.
+```
 fernando(mongod-3.2.6) be-mean-pokemons> var query = {$and: [ {type: /água/i}, {attack: {$lt : 50}} ]}
 fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
 {
@@ -631,9 +639,10 @@ fernando(mongod-3.2.6) be-mean-pokemons> db.pokemons.find(query)
   ]
 }
 Fetched 1 record(s) in 2ms
+```
 
-
-9. Demonstre qual a diferença entre os operadores '$ne' e '$not'
+### 9. Demonstre qual a diferença entre os operadores '$ne' e '$not'
+```
 $ne, not equal, operador de comparação, não aceita rejex. Necessariamente o banco tem que ter o campo o qual está sendo buscado na função.
 $not, note lógico, aceita regex.
-
+```

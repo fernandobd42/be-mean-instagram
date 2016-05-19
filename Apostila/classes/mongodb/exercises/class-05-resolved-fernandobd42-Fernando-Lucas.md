@@ -17,6 +17,7 @@ User: [GithubUser](link)
 Autor: Seu Nome
 
 ### Importar as collections `restaurantes` e `pokemons`.
+```
 ➜  be-mean-instagram git:(master) ✗ mongoimport --host 127.0.0.1 --db be-mean --collection pokemons --drop --file Apostila/classes/mongodb/pokemons.json
 2016-05-08T21:42:36.485-0300	connected to: 127.0.0.1
 2016-05-08T21:42:36.486-0300	dropping: be-mean.pokemons
@@ -25,9 +26,10 @@ Autor: Seu Nome
 2016-05-08T21:42:55.417-0300	connected to: 127.0.0.1
 2016-05-08T21:42:55.417-0300	dropping: be-mean.pokemons
 2016-05-08T21:42:56.613-0300	imported 25359 documents
-
+```
 
 ### Distinct por `cuisine` na restaurantes.
+```
 fernando(mongod-3.2.6) be-mean> db.pokemons.distinct('cuisine').sort()
 [
   "Afghan",
@@ -116,9 +118,10 @@ fernando(mongod-3.2.6) be-mean> db.pokemons.distinct('cuisine').sort()
   "Vegetarian",
   "Vietnamese/Cambodian/Malaysia"
 ]
-
+```
 
 ### Distinct por `types` na pokemons.
+```
 fernando(mongod-3.2.6) be-mean> db.pokemons.distinct('types').sort()
 [
   "bug",
@@ -140,9 +143,10 @@ fernando(mongod-3.2.6) be-mean> db.pokemons.distinct('types').sort()
   "steel",
   "water"
 ]
-
+```
 
 ### As primeiras 3 pág. com .limit() e .skip() de pokemons (5 em 5).
+```
 fernando(mongod-3.2.6) be-mean> db.pokemons.find({}, {name: 1, _id: 0}).limit(5).skip(5 * 0)
 {
   "name": "Wartortle"
@@ -194,9 +198,10 @@ fernando(mongod-3.2.6) be-mean> db.pokemons.find({}, {name: 1, _id: 0}).limit(5)
   "name": "Seel"
 }
 Fetched 5 record(s) in 1ms
-
+```
 
 ### Group ou Aggregate contando a quantidade de pokemons de cada tipo.
+```
 db.pokemons.group({
   initial: {total: 0},
   reduce: function(current, result) {
@@ -314,13 +319,14 @@ db.pokemons.group({
     ],
     "ok": 1
   }
-
+```
 
 ### Realizar 3 counts na pokemons.
+```
 fernando(mongod-3.2.6) be-mean> db.pokemons.count()
 610
 fernando(mongod-3.2.6) be-mean> db.pokemons.count({ types: 'fire'})
 47
 fernando(mongod-3.2.6) be-mean> db.pokemons.count({defense: {$gt: 70}})
 250
-
+```
